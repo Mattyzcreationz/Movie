@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies App!</title>
+</head>
+<body>
+    <!--
+        ::::Contains a form with two inputs for a title
+    and rating along with a button to submit the form.
+
+
+    !When the form is submitted, capture the values for each of the inputs
+    and append them to the DOM along with a button to remove each title and rating 
+    from the DOM
+
+    !When the button to remove is clicked, remove each title and rating from 
+    the DOM.
+-->  
+<!--First Step-->
+<form class="movieRating">
+    <input class="title" placeholder="Title">
+    <input class="rating" min="1" max="10" value="1" type="number">
+    <button type="Submit" class="Submit">Submit</button>
+</form>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('body').on('click', '.remove', function(){
+            const remove = $('.reviwed');
+            remove.remove();
+        });
+        $('.Submit').click(function(e){
+            e.preventDefault();
+            //creating shell elements
+            
+            const ratinglogic = $('.rating').val();
+            const titlelogic = $('.title').val();
+            if(titlelogic.length <  2){ 
+                alert('Is this the right Movie?');
+                return;
+            }
+            if(ratinglogic > 10 || ratinglogic < 0){
+                alert('Unfortunatly your rating is below 0 or above 10.');
+                return;
+            } else {
+            //Creating Rules between 0-10!
+            const container = $('<div>');
+            const ul = $('<ul>');
+            const li0 = $('<li>');
+            const li1 = $('<li>');
+                container.attr('class', 'reviwed');
+                //Creating shell elements class
+                ul.attr('class', 'reviewed');
+                li0.attr('class', 'titleResult');
+                li1.attr('class', 'titleResult');
+                //Displaying information inputs value.
+                //extracting value of the input.
+                const title= $('.title').val();
+                const rating = $('.rating').val();
+                li0.append(title);
+                li1.append(rating);                
+                //Appending
+                $('body').append(container);
+                container.append(ul);
+                ul.append(li0);
+                ul.append(li1);
+                const remove = $('<button>');
+                    remove.html('Remove');
+                    remove.attr('class', 'remove');
+                container.append(remove);
+            }
+        });
+    });
+</script>
+</body>
+</html>
+
+
+
